@@ -100,7 +100,7 @@ jQuery(document).ready(function ($) {
             } else {
                 $('.btn_previous').removeClass('hide');
             }
-            if(bodyIndex == 5) {
+            if(bodyIndex == 4) {
                 $('.btn_next').addClass('hide');
             } else {
                 $('.btn_next').removeClass('hide');

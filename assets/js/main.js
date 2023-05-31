@@ -33,16 +33,23 @@ jQuery(document).ready(function ($) {
         });
 
         // Next
+
         let j = 0;
         let bodyIndex = $('body').attr('index');
         if(bodyIndex == 0) {
             $('.btn_previous').addClass('hide');
         }
+
         $('.btn_next').on('click', function () {
+            
+            $('.weather').remove();
+            active();
+
+            // next and prev button management
             bodyIndex++;
             if(bodyIndex == 0) {
                 $('.btn_previous').addClass('hide');
-            }else {
+            } else {
                 $('.btn_previous').removeClass('hide');
             }
             if(bodyIndex == 5) {
@@ -50,8 +57,7 @@ jQuery(document).ready(function ($) {
             } else {
                 $('.btn_next').removeClass('hide');;
             }
-            $('.weather').remove();
-            active();
+
             let tomorrow = new Date();
             j++;
             tomorrow.setDate(tomorrow.getDate()+j);
@@ -61,7 +67,6 @@ jQuery(document).ready(function ($) {
             tomorrow = tomorrow.getFullYear()+'-'+tomorrowMonth+'-'+tomorrowDay;
             tomorrowPrinted = tomorrowDay + '/' + tomorrowMonth+'/' + tomorrowYear;
              
-
             jQuery.each(weatherJson.list, function(i){
                 let infodate = weatherJson.list[i].dt_txt.split(" ");
                 let date = infodate[0];
@@ -76,18 +81,18 @@ jQuery(document).ready(function ($) {
             
                 if(tomorrow == date){
                     $('main').append('<section class="weather"><div class="container"><div class="row"><div class="col-md-7"><span class="daytime-preview">'+myTime+'</span><div class="weather_image"><img src="assets/images/icons/'+ weatherJson.list[i].weather[0].icon+'.svg"></div></div><div class="col-md-5"><div class="weather_data"><p><span class="daytime">'+myTime+'</span><span class="dateInfo">'+tomorrowPrinted+'</span><span class="degrees">'+temperature+'°</span><span class="description">' + weatherJson.list[i].weather[0].description + '</span><span class="data wind">Wind: '+ windSpeed +' m/s</span><span class="data humidity">Humidity: '+humidity+'%</span></p></div></div></div></div></section>');
-                    
                 } 
     
             });
         });
 
         // Previous
-        $('.btn_previous').on('click', function () {;
+        $('.btn_previous').on('click', function () {
+
             $('.weather').remove();
             active();
-            let tomorrow = new Date();
-            j--;
+
+            // next and prev button management
             bodyIndex--;
             if(bodyIndex == 0) {
                 $('.btn_previous').addClass('hide');
@@ -99,12 +104,15 @@ jQuery(document).ready(function ($) {
             } else {
                 $('.btn_next').removeClass('hide');
             }
-            tomorrow.setDate(tomorrow.getDate()+j);
-            tomorrowMonth = ("0" + (tomorrow.getMonth() + 1)).slice(-2);
-            tomorrowDay = ("0" + (tomorrow.getDate())).slice(-2);
-            tomorrowYear = tomorrow.getFullYear();
-            tomorrow = tomorrow.getFullYear()+'-'+tomorrowMonth+'-'+tomorrowDay;
-            tomorrowPrinted = tomorrowDay + '/' + tomorrowMonth+'/' + tomorrowYear;
+
+            let yesterday = new Date();
+            j--;
+            yesterday.setDate(yesterday.getDate()+j);
+            yesterdayMonth = ("0" + (yesterday.getMonth() + 1)).slice(-2);
+            yesterdayDay = ("0" + (yesterday.getDate())).slice(-2);
+            yesterdayYear = yesterday.getFullYear();
+            yesterday = yesterday.getFullYear()+'-'+yesterdayMonth+'-'+yesterdayDay;
+            yesterdayPrinted = yesterdayDay + '/' + yesterdayMonth+'/' + yesterdayYear;
             
 
             jQuery.each(weatherJson.list, function(i){
@@ -119,8 +127,8 @@ jQuery(document).ready(function ($) {
                 temperature = temperature.toFixed(0); 
                 windSpeed = windSpeed.toFixed(1);
             
-                if(tomorrow == date){
-                    $('main').append('<section class="weather"><div class="container"><div class="row"><div class="col-md-7"><span class="daytime-preview">'+myTime+'</span><div class="weather_image"><img src="assets/images/icons/'+ weatherJson.list[i].weather[0].icon+'.svg"></div></div><div class="col-md-5"><div class="weather_data"><p><span class="daytime">'+myTime+'</span><span class="dateInfo">'+tomorrowPrinted+'</span><span class="degrees">'+temperature+'°</span><span class="description">' + weatherJson.list[i].weather[0].description + '</span><span class="data wind">Wind: '+ windSpeed +' m/s</span><span class="data humidity">Humidity: '+humidity+'%</span></p></div></div></div></div></section>');
+                if(yesterday == date){
+                    $('main').append('<section class="weather"><div class="container"><div class="row"><div class="col-md-7"><span class="daytime-preview">'+myTime+'</span><div class="weather_image"><img src="assets/images/icons/'+ weatherJson.list[i].weather[0].icon+'.svg"></div></div><div class="col-md-5"><div class="weather_data"><p><span class="daytime">'+myTime+'</span><span class="dateInfo">'+yesterdayPrinted+'</span><span class="degrees">'+temperature+'°</span><span class="description">' + weatherJson.list[i].weather[0].description + '</span><span class="data wind">Wind: '+ windSpeed +' m/s</span><span class="data humidity">Humidity: '+humidity+'%</span></p></div></div></div></div></section>');
                     
                 } 
     
@@ -137,11 +145,6 @@ jQuery(document).ready(function ($) {
                 e.preventDefault();
                 $('.weather').removeClass('active');
                 $(this).toggleClass('active');
-                /*
-                    $('html, body').animate({
-                        scrollTop: $(this).offset().top-100
-                    }, 1000)
-                */
             });
         },100);
     }

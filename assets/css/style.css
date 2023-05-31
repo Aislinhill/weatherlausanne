@@ -3,6 +3,10 @@
     --white: #fff;
     --transparentwhite : #ffffff6b;
     --green: #8ba892;
+    --lightOrange: #e3bb88;
+    --orange: #d89864;
+    --red: #b1695a;
+    --darkRed: #644749;
 }
 
 span {
@@ -28,7 +32,6 @@ p {
 }
 
 /* header */
-
 header {
     padding: 15px 0;
     background: var(--green);
@@ -81,15 +84,13 @@ header .container {
     width: 50px;
 }
 
-/* Main */
-
+/* main */
 .weather {
-    /* min-height: calc(25vh - 25px); */
     height: 200px;
     transition: all 0.5s linear;
     padding: 30px;
     cursor: pointer;
-    background-color: #d89864;
+    background-color: var(--orange);
     overflow: hidden;
     transition: all .2s ease-in-out;
     display: flex;
@@ -100,7 +101,6 @@ header .container {
     height: 650px;
     display: flex;
     align-items: center;
-    box-shadow: 1px 5px 5px 0px #0000005e;
     box-shadow: 0px 9px 20px 2px #0000002b;
     position: relative;
 }
@@ -161,19 +161,19 @@ header .container {
 }
 
 main .weather:nth-child(4n+1) {
-    background: #e3bb88
+    background: var(--lightOrange);
 }
 
 main .weather:nth-child(4n+2) {
-    background: #d89864;
+    background: var(--orange);
 }
 
 main .weather:nth-child(4n+3) {
-    background: #b1695a;
+    background: var(--red);
 }
 
 main .weather:nth-child(4n+4) {
-    background: #644749;
+    background: var(--darkRed);
 }
 
 .daytime-preview,
@@ -196,7 +196,6 @@ main .weather:nth-child(4n+4) {
 
 .weather_data {
     display: flex;
-    /* justify-content: flex-end; */
 }
 
 .weather_data * {
@@ -210,7 +209,6 @@ main .weather:nth-child(4n+4) {
 
 .degrees {
     font-weight: 100;
-    /*font-size: clamp(3.75rem, calc(1.98rem + 8.87vw), 9.38rem);*/
     font-size: clamp(2.5rem, calc(1.75rem + 3.75vw), 6.25rem);
 }
 
@@ -235,7 +233,6 @@ main .weather:nth-child(4n+4) {
 .weather_image {
     opacity: 0;
     visibility: hidden;
-    /*position: absolute;*/
     height: 0;
     text-align: center;
     transform: translateY(-150px);
@@ -294,17 +291,20 @@ main {
     font-size: 20px;
     font-weight: bold;
 }
+
 .btn.btn--white {
     color: white;
     font-weight: normal;
 }
+
 .hide {
     visibility: hidden;
     pointer-events: none;
 }
+
 /* settings page */
 .bodySettings {
-    background-color: #d89864;
+    background-color: var(--orange);
     height: 100vh;
 }
 
@@ -318,16 +318,20 @@ h1.setting_title {
 
 /* Media queries*/
 @media(max-width:767px) {
+
     .weather{
         height: 250px;
     }
+
     .weather_data {
         text-align: center;
         display: block;
     }
+
     .daytime-preview {
         text-align: center;
     }
+
     .weather_data p {
         display: flex;
         text-align: center;
@@ -335,6 +339,7 @@ h1.setting_title {
         justify-content: center;
         align-items: center;
     }
+
     .description {
         margin-left: 0;
     }

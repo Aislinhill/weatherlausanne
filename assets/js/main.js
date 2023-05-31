@@ -10,7 +10,7 @@ jQuery(document).ready(function ($) {
         let currentDt = new Date();
         let currentMonth = ("0" + (currentDt.getMonth() + 1)).slice(-2);
         let datePrinted = currentDt.getDate() + '/'+currentMonth+'/'+ currentDt.getFullYear();
-        let currentMinute = ("0" + (currentDt.getMinutes())).slice(-2)
+        let currentMinute = ("0" + (currentDt.getMinutes())).slice(-2);
         let currentTime = currentDt.getHours() + ":" + currentMinute;
 
         $('.title p').append('<span class="date">'+datePrinted+'</span><span class="time">'+currentTime+'</span>');
@@ -19,7 +19,8 @@ jQuery(document).ready(function ($) {
             let date = infodate[0];
             let time = infodate[1].split(":");
             let myTime = time[0]+':'+time[1];
-            let currentDate = currentDt.getFullYear()+'-'+currentMonth+'-'+currentDt.getDate();
+            let day = ("0" + (currentDt.getDate())).slice(-2);
+            let currentDate = currentDt.getFullYear()+'-'+currentMonth+'-'+day;
             let temperature = weatherJson.list[i].main.temp_max;
             let windSpeed = weatherJson.list[i].wind.speed;
             let humidity = weatherJson.list[i].main.humidity;

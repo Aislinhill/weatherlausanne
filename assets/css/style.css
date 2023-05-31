@@ -279,8 +279,13 @@ footer {
     justify-content: space-between;
     padding: 15px;
     align-items: center;
-    position: sticky;
+    position: fixed;
     bottom: 0;
+    width: 100%;
+}
+
+main {
+    margin-bottom: 100px;
 }
 
 .btn {
